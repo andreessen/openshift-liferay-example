@@ -34,4 +34,4 @@ RUN \
     $WILDFLY_HOME/bin/jboss-cli.sh --echo-command --file=/tmp/server-config.cli ; \
     ln -s $WILDFLY_HOME ${LIFERAY_HOME} ; \
     rm -rf $WILDFLY_HOME/standalone/configuration/standalone_xml_history ; \
-    chmod 777 $LIFERAY_HOME/osgi $WILDFLY_HOME/standalone/configuration,data,log,tmp}
+    chmod 777 $LIFERAY_HOME/osgi $WILDFLY_HOME/standalone/{configuration,data,log,tmp}
