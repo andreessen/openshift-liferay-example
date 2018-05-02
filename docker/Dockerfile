@@ -32,4 +32,4 @@ COPY portal-*.properties ${LIFERAY_HOME}/
 
 RUN \
     $WILDFLY_HOME/bin/jboss-cli.sh --echo-command --file=/tmp/server-config.cli ; \
-    ls -s $WILDFLY_HOME ${LIFERAY_HOME}
+    ln -s $WILDFLY_HOME ${LIFERAY_HOME}
