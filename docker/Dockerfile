@@ -22,13 +22,14 @@ RUN \
     mkdir -p $LIFERAY_HOME/osgi ; \
     unzip -d $LIFERAY_HOME/osgi /tmp/$LF_OSGI_DEPS-${BUILD_VERSION}.zip ; \
     mv $LIFERAY_HOME/osgi/$LF_OSGI_DEPS/* $LIFERAY_HOME/osgi ; \
-    mv /tmp/${LF_PORTAL}-${VERSION} $WILDFLY_HOME/standalone/deployments/ROOT.war
     rm -rf $LIFERAY_HOME/osgi/$LF_OSGI_DEPS/ ; \
     rm -rf /tmp/liferay-ce-*.zip
 
 COPY module.xml $WILDFLY_HOME/modules/com/liferay/portal/main
 
 COPY server-config.cli /tmp/
+COPY portal-*.properties ${LIFERAY_HOME}/
 
 RUN \
-    $WILDFLY_HOME/bin/jboss-cli.sh --echo-command --file=/tmp/server-config.cli
+    $WILDFLY_HOME/bin/jboss-cli.sh --echo-command --file=/tmp/server-config.cli ; \
+    ls -s $WILDFLY_HOME ${LIFERAY_HOME}

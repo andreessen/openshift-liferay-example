@@ -11,4 +11,6 @@ $ oc new-build \
     --name=wildfly12-liferay7 \
     -l liferay=
 
+$ oc new-app mysql -p DATABASE_SERVICE_NAME=mysql-lportal -p MYSQL_DATABASE=lportal
+
 $ oc new-app wildfly12-liferay7 

@@ -3,11 +3,22 @@ embed-server --admin-only --std-out=echo
 /subsystem=undertow/server=default-server/http-listener=default:read-attribute(name=url-charset)
 /subsystem=deployment-scanner/scanner=default:read-attribute(name=deployment-timeout)
 
-/subsystem=security/security-domain=portal-realm:add(cache-type=default)
-/subsystem=security/security-domain=portal-realm/authentication=classic:add()
-/subsystem=security/security-domain=portal-realm/authentication=classic/login-module=liferay:add( \
+/subsystem=security/security-domain=PortalRealm:add(cache-type=default)
+/subsystem=security/security-domain=PortalRealm/authentication=classic:add()
+/subsystem=security/security-domain=PortalRealm/authentication=classic/login-module=liferay:add( \
 	code=com.liferay.portal.security.jaas.PortalLoginModule, flag=required \
 )
 
 /subsystem=undertow/server=default-server/host=default-host/location=\/:remove()
 
+exit
+
+/subsystem=datasources/data-source=LiferayMysqlDS:add(
+    jndi-name=java:jboss/datasources/LiferayDS, 
+    driver-name=mysql, 
+    connection-url=jdbc:mysql://mysql:3306/lportal,
+    user-name=lportal,
+    password=lportal,
+    max-pool-size=15,
+    min-pool-size=5
+)
