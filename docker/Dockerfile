@@ -12,18 +12,26 @@ ENV \
 RUN \
     mkdir -p $WILDFLY_HOME/modules/com/liferay/portal/main
 
-COPY module.xml $WILDFLY_HOME/modules/com/liferay/portal/main
+
+#COPY liferay-ce-portal-* /tmp/
+#RUN \
 
 RUN \
+    set -e ; \
     for d in {${LF_DEPS},${LF_OSGI_DEPS}}-${BUILD_VERSION}.zip ${LF_PORTAL}-${BUILD_VERSION}.war ; do \
 	curl -Lo /tmp/$d ${DL_PREFIX}/$d/download ; \
-    done
-#COPY liferay-ce-portal-* /tmp/
-
-RUN \
+    done ; \
     unzip -j -d $WILDFLY_HOME/modules/com/liferay/portal/main /tmp/${LF_DEPS}-${BUILD_VERSION}.zip ; \
     mkdir -p $LIFERAY_HOME/osgi ; \
     unzip -d $LIFERAY_HOME/osgi /tmp/$LF_OSGI_DEPS-${BUILD_VERSION}.zip ; \
     set -x ; \
     mv $LIFERAY_HOME/osgi/$LF_OSGI_DEPS/* $LIFERAY_HOME/osgi ; \
-    rm -rf $LIFERAY_HOME/osgi/$LF_OSGI_DEPS/
+    rm -rf $LIFERAY_HOME/osgi/$LF_OSGI_DEPS/ ; \
+    rm -rf /tmp/liferay-ce-*
+
+COPY module.xml $WILDFLY_HOME/modules/com/liferay/portal/main
+
+COPY server-config.cli /tmp/
+
+RUN \
+    $WILDFLY_HOME/bin/jboss-cli.sh --echo-command --file=/tmp/server-config.cli
