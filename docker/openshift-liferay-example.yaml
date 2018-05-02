@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ImageStream
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewBuild
+    openshift.io/image.dockerRepositoryCheck: 2018-05-02T20:47:20Z
+    tags: builder,wildfly,java
+  creationTimestamp: null
+  generation: 8
+  labels:
+    liferay: "true"
+  name: openshift-liferay-example
+spec:
+  lookupPolicy:
+    local: false
