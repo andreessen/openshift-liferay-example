@@ -10,24 +10,21 @@ ENV \
     LF_PORTAL="liferay-ce-portal-7.0-ga5"
 
 RUN \
-    mkdir -p $WILDFLY_HOME/modules/com/liferay/portal/main
-
-
-#COPY liferay-ce-portal-* /tmp/
-#RUN \
+    mkdir -p $WILDFLY_HOME/modules/com/liferay/portal/main ; \
+    curl -Lo $WILDFLY_HOME/standalone/deployments/ROOT.war ${DL_PREFIX}/${LF_PORTAL}-${BUILD_VERSION}.war/download
 
 RUN \
     set -e ; \
-    for d in {${LF_DEPS},${LF_OSGI_DEPS}}-${BUILD_VERSION}.zip ${LF_PORTAL}-${BUILD_VERSION}.war ; do \
+    for d in {${LF_DEPS},${LF_OSGI_DEPS}}-${BUILD_VERSION}.zip ; do \
 	curl -Lo /tmp/$d ${DL_PREFIX}/$d/download ; \
     done ; \
     unzip -j -d $WILDFLY_HOME/modules/com/liferay/portal/main /tmp/${LF_DEPS}-${BUILD_VERSION}.zip ; \
     mkdir -p $LIFERAY_HOME/osgi ; \
     unzip -d $LIFERAY_HOME/osgi /tmp/$LF_OSGI_DEPS-${BUILD_VERSION}.zip ; \
-    set -x ; \
     mv $LIFERAY_HOME/osgi/$LF_OSGI_DEPS/* $LIFERAY_HOME/osgi ; \
+    mv /tmp/${LF_PORTAL}-${VERSION} $WILDFLY_HOME/standalone/deployments/ROOT.war
     rm -rf $LIFERAY_HOME/osgi/$LF_OSGI_DEPS/ ; \
-    rm -rf /tmp/liferay-ce-*
+    rm -rf /tmp/liferay-ce-*.zip
 
 COPY module.xml $WILDFLY_HOME/modules/com/liferay/portal/main
 
