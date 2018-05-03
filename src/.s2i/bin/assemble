@@ -1,0 +1,56 @@
+#!/bin/bash
+
+set -xe
+
+for d in {${LF_DEPS},${LF_OSGI_DEPS}}${LF_VERSION}-${LF_BUILD}.zip ; do
+    curl -Lo /tmp/$d ${DL_PREFIX}/$d/download
+done
+
+mkdir -p $WILDFLY_HOME/modules/com/liferay/portal/main
+
+unzip -j -d $WILDFLY_HOME/modules/com/liferay/portal/main /tmp/${LF_DEPS}-${LF_VERSION}-${LF_BUILD}.zip
+
+mkdir -p $LIFERAY_HOME/osgi
+nzip -d $LIFERAY_HOME/osgi /tmp/${LF_OSGI_DEPS}-${LF_VERSION}-${LF_BUILD}.zip
+mv $LIFERAY_HOME/osgi/${LF_OSGI_DEPS}-${LF_VERSION}/* $LIFERAY_HOME/osgi
+rm -rf $LIFERAY_HOME/osgi/${LF_OSGI_DEPS}-${LF_VERSION}
+
+rm -rf /tmp/liferay-ce-*.zip
+
+cat > $WILDFLY_HOME/modules/com/liferay/portal/main/module.xml << EOF
+<?xml version="1.0"?>
+
+<module xmlns="urn:jboss:module:1.0" name="com.liferay.portal">
+    <resources>
+        <resource-root path="com.liferay.registry.api.jar" />
+        <resource-root path="portal-kernel.jar" />
+        <resource-root path="portlet.jar" />
+        <resource-root path="hsql.jar" />
+    </resources>
+    <dependencies>
+        <module name="javax.api" />
+        <module name="javax.mail.api" />
+        <module name="javax.servlet.api" />
+        <module name="javax.servlet.jsp.api" />
+        <module name="javax.transaction.api" />
+    </dependencies>
+</module>
+EOF
+
+$WILDFLY_HOME/bin/jboss-cli.sh --echo-command --commands="\
+embed-server --admin-only --std-out=echo,\
+/subsystem=undertow/server=default-server/http-listener=default:read-attribute(name=url-charset),\
+/subsystem=deployment-scanner/scanner=default:read-attribute(name=deployment-timeout),\
+/subsystem=security/security-domain=PortalRealm:add(cache-type=default),\
+/subsystem=security/security-domain=PortalRealm/authentication=classic:add(),\
+/subsystem=security/security-domain=PortalRealm/authentication=classic/login-module=liferay:add(\
+ code=com.liferay.portal.security.jaas.PortalLoginModule, flag=required),\
+/subsystem=undertow/server=default-server/host=default-host/location=\/:remove()\
+"
+
+export SERVER_HOME=$LIFERAY_HOME/wildfly
+
+mkdir -p $SERVER_HOME
+tar -C $WILDFLY_HOME/standalone -c . | tar -C $SERVER_HOME/standalone -x
+
+rm -rf $SERVER_HOME/standalone/configuration/standalone_xml_history 
