@@ -7,4 +7,4 @@ echo "====================================================="
 #export SERVER_HOME=$APP_ROOT/$LIFERAY_HOME/wildfly/standalone
 export SERVER_HOME=$WILDFLY_HOME/standalone
 
-$WILDFLY_HOME/bin/standalone.sh -Djboss.server.base.dir=$SERVER_HOME $*
+$LIFERAY_HOME/$WILDFLY_HOME/bin/standalone.sh -Djboss.server.base.dir=$SERVER_HOME $*
