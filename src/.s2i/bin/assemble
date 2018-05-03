@@ -6,6 +6,8 @@ echo "====================================================="
 
 set -xe
 
+DL_PREFIX=${LF_REPO_PREFIX:-$DL_PREFIX}
+
 for d in {${LF_DEPS},${LF_OSGI_DEPS}}${LF_VERSION}-${LF_BUILD}.zip ; do
     curl -Lo /tmp/$d ${DL_PREFIX}/$d/download
 done
