@@ -53,7 +53,7 @@ embed-server --admin-only --std-out=echo,\
 export SERVER_HOME=$LIFERAY_HOME/wildfly
 
 mkdir -p $SERVER_HOME
-tar -C $WILDFLY_HOME/standalone -c . | tar -C $SERVER_HOME/standalone -x
+tar -C $WILDFLY_HOME -c standalone | tar -C $SERVER_HOME -x
 
 curl -Lo $SERVER_HOME/standalone/deployments/ROOT.war ${DL_PREFIX}/${LF_PORTAL}-${LF_VERSION}-${LF_BUILD}.war/download
 
