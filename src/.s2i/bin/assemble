@@ -55,7 +55,7 @@ export SERVER_HOME=$WILDFLY_HOME
 
 #mkdir -p $SERVER_HOME
 #tar -C $WILDFLY_HOME -c standalone | tar -C $SERVER_HOME -x
-ln -s $WILDFLY_HOME ${APP_ROOT}$LIFERAY_HOME
+ln -s $WILDFLY_HOME $LIFERAY_HOME
 
 curl -Lo $SERVER_HOME/standalone/deployments/ROOT.war ${DL_PREFIX}/${LF_PORTAL}-${LF_VERSION}-${LF_BUILD}.war${DL_SUFFIX}
 
