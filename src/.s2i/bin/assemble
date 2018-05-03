@@ -1,12 +1,8 @@
 #!/bin/bash
-
-env
-
-echo "====================================================="
-
 set -xe
 
 DL_PREFIX=${LF_REPO_PREFIX:-$DL_PREFIX}
+LIFERAY_HOME=$APP_ROOT/liferay
 
 for d in {${LF_DEPS},${LF_OSGI_DEPS}}-${LF_VERSION}-${LF_BUILD}.zip ; do
     curl -Lo /tmp/$d ${DL_PREFIX}/${d}${DL_SUFFIX}
