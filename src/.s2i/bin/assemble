@@ -63,8 +63,8 @@ function fix_perms() {
     local path=$1
     local mode=${2:-"g+w"}
 
-    chgrp 0 $path
-    chmod $mode $path
+    chgrp -R 0 $path
+    chmod -R $mode $path
 }
 
 for d in $SERVER_HOME/standalone/{data,deployments,log,tmp} $LIFERAY_HOME/osgi ; do
