@@ -4,6 +4,6 @@ env |sort
 
 echo "====================================================="
 
-export SERVER_HOME=$LIFERAY_HOME/wildfly
+export SERVER_HOME=$APP_ROOT/$LIFERAY_HOME/wildfly
 
 $WILDFLY_HOME/bin/standalone.sh -Djboss.server.base.dir=$SERVER_HOME $*
