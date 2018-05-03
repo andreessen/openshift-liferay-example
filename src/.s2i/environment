@@ -1,5 +1,6 @@
 #!/bin/bash
 
+LIFERAY_HOME=/liferay
 WILDFLY_HOME=/wildfly
 
 LF_BUILD=20171018150113838
