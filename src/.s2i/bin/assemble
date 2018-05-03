@@ -67,6 +67,6 @@ function fix_perms() {
     chmod -R $mode $path
 }
 
-for d in $SERVER_HOME/standalone/{data,deployments,log,standalone_xml_history,tmp} $LIFERAY_HOME/osgi ; do
+for d in $SERVER_HOME/standalone/{configuration/standalone_xml_history,data,deployments,log,tmp} $LIFERAY_HOME/osgi ; do
     fix_perms $d
 done
