@@ -17,7 +17,7 @@ mkdir -p $WILDFLY_HOME/modules/com/liferay/portal/main
 unzip -j -d $WILDFLY_HOME/modules/com/liferay/portal/main /tmp/${LF_DEPS}-${LF_VERSION}-${LF_BUILD}.zip
 
 mkdir -p $LIFERAY_HOME/osgi
-nzip -d $LIFERAY_HOME/osgi /tmp/${LF_OSGI_DEPS}-${LF_VERSION}-${LF_BUILD}.zip
+unzip -d $LIFERAY_HOME/osgi /tmp/${LF_OSGI_DEPS}-${LF_VERSION}-${LF_BUILD}.zip
 mv $LIFERAY_HOME/osgi/${LF_OSGI_DEPS}-${LF_VERSION}/* $LIFERAY_HOME/osgi
 rm -rf $LIFERAY_HOME/osgi/${LF_OSGI_DEPS}-${LF_VERSION}
 
