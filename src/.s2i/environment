@@ -3,8 +3,8 @@
 LIFERAY_HOME=/liferay
 WILDFLY_HOME=/wildfly
 
-LF_BUILD=20171018150113838
-LF_VERSION=7.0-ga5
+#LF_BUILD=20171018150113838
+#LF_VERSION=7.0-ga5
 DL_PREFIX=https://sourceforge.net/projects/lportal/files/Liferay%20Portal/7.0.4%20GA5
 LF_DEPS=liferay-ce-portal-dependencies
 LF_OSGI_DEPS=liferay-ce-portal-osgi
