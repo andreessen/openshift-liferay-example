@@ -37,7 +37,7 @@ RUN \
 	 code=com.liferay.portal.security.jaas.PortalLoginModule, flag=required),\
 	/subsystem=undertow/server=default-server/host=default-host/location=\/:remove()\
     " ; \
-    rm -rf $WILDFLY_HOME/standalone/configuration/standalone_xml_history ; \
+    rm -rf $WILDFLY_HOME/standalone/{configuration/standalone_xml_history,log/*,tmp/*,data/*} ; \
     chmod g+w $LIFERAY_HOME/osgi $WILDFLY_HOME/standalone/{configuration,data,deployments,log,tmp}
 
 COPY module.xml $WILDFLY_HOME/modules/com/liferay/portal/main
