@@ -42,4 +42,4 @@ RUN \
 
 COPY module.xml $WILDFLY_HOME/modules/com/liferay/portal/main
 
-CMD [ "/wildfly/bin/standalone.sh", "-b" , "0.0.0.0" ]
+CMD [ "/opt/app-root/liferay/wildfly/bin/standalone.sh", "-b" , "0.0.0.0" ]
