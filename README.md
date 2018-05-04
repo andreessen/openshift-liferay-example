@@ -37,7 +37,7 @@ $ oc set volume dc/$APP_NAME --add --name=portal-ext-props --type=configmap --mo
 
 ```
 $ oc new-project liferay-example
-$ oc --as=system:admin -n liferay-example create quota resources --hard=cpu=4,memory=4G,pods=10,services=4,secrets=10,persistentvolumeclaims=5
+$ oc --as=system:admin -n liferay-example create quota resources --hard=cpu=4,memory=4G,pods=10,services=4,secrets=15,persistentvolumeclaims=5
 $ oc create -f liferay-on-wildfly-s2i.yaml
 $ oc new-app liferay-on-wildfly-s2i -p APP_NAME=liferay-ex
 ```
