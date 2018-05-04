@@ -21,7 +21,7 @@ parameters:
   value: '20171018150113838'
 - name: LF_REPO_PREFIX
   description: LifeRay Mirror URL, for example http://httpd-ex-liferay-distr.apps.172.20.10.5.xip.io/liferay, 
-    if blank all resources downloads from https://sourceforge.net/projects/lportal/files/Liferay%20Portal/7.0.4%20GA5
+    if blank all resources downloaded from https://sourceforge.net/projects/lportal/files/Liferay%20Portal/7.0.4%20GA5
   value: ''
 - name: APP_HOSTNAME
   value: ''
@@ -43,6 +43,10 @@ parameters:
   value: https://github.com/dsevost/openshift-liferay-example
 - name: S2I_SOURCE_CONTEXT_DIR
   value: src
+- name: BUILD_STRATEGY
+  description: 'It could be two strategies: source or docker'
+  from: '[sourcedk]'
+  value: source
 objects:
 - apiVersion: v1
   kind: ImageStream
@@ -67,6 +71,13 @@ objects:
       app: ${APP_NAME}
     name: ${APP_NAME}
   spec:
+    resources:
+      limits:
+        memory: 512Mi
+        cpu: 500m
+      requests:
+        memory: 256Mi
+        cpu: 200m
     output:
       to:
         kind: ImageStreamTag
@@ -77,7 +88,7 @@ objects:
         uri: ${S2I_SOURCE_REPO}
       type: Git
     strategy:
-      sourceStrategy:
+      ${BUILD_STRATEGY}Strategy:
         env:
         - name: LF_REPO_PREFIX
           value: ${LF_REPO_PREFIX}
@@ -89,7 +100,7 @@ objects:
           kind: ImageStreamTag
           name: wildfly:12.0
           namespace: openshift
-      type: Source
+      type: ${BUILD_STRATEGY}
     triggers:
     - type: ConfigChange
     - imageChange: {}
