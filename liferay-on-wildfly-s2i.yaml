@@ -176,6 +176,9 @@ objects:
             limits:
               memory: ${DB_MEMORY_LIMIT}
               cpu: ${DB_CPU_LIMIT}
+            requests:
+              memory: ${DB_MEMORY_LIMIT}
+              cpu: ${DB_CPU_LIMIT}
           volumeMounts:
           - mountPath: /var/lib/mysql/data
             name: ${APP_NAME}-mysql-data
