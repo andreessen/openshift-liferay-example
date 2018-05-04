@@ -32,3 +32,13 @@ $ oc set volume dc/$APP_NAME --add --name=portal-ext-props --type=configmap --mo
     --configmap-name=liferay-portal-ext --sub-path=portal-ext.properties # --overwrite
 
 ```
+
+## Build from S2I template
+
+```
+$ export APP_NAME=wildfly12-liferay7
+$ oc new-project liferay-example
+$ oc create -f liferay-on-wildfly-s2i.yaml
+$ oc new-app liferay-on-wildfly-s2i -p APP_NAME=liferay-ex
+```
+
