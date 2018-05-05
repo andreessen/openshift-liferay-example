@@ -10,6 +10,7 @@ for d in {${LF_DEPS},${LF_OSGI_DEPS}}-${LF_VERSION}-${LF_BUILD}.zip ; do
 done
 
 mkdir -p $WILDFLY_HOME/modules/com/liferay/portal/main
+ls -la /
 mkdir -p $LIFERAY_HOME/osgi
 
 unzip -j -d $WILDFLY_HOME/modules/com/liferay/portal/main /tmp/${LF_DEPS}-${LF_VERSION}-${LF_BUILD}.zip
