@@ -9,4 +9,4 @@ DL_PREFIX=https://sourceforge.net/projects/lportal/files/Liferay%20Portal/7.0.4%
 LF_DEPS=liferay-ce-portal-dependencies
 LF_OSGI_DEPS=liferay-ce-portal-osgi
 LF_PORTAL=liferay-ce-portal
-APP_ROOT=/opt/app-root/
+APP_ROOT=/opt/app-root
