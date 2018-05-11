@@ -78,3 +78,6 @@ function fix_perms() {
 for d in $SERVER_HOME/standalone/{configuration,data,deployments,log,tmp} $LIFERAY_HOME/osgi ; do
     fix_perms $d
 done
+
+#Add write permission to group - Lifereay could not write portal-setup-wizard.properties without it
+chmod g+rw $LIFERAY_HOME
