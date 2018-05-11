@@ -41,9 +41,9 @@ cat > $WILDFLY_HOME/modules/com/liferay/portal/main/module.xml << EOF
 </module>
 EOF
 
-cat > $LIFERAY_HOME/portal-ext.properties << EOF
-jdbc.default.jndi.name=java:jboss/datasources/LiferayDS
-EOF
+#cat > $LIFERAY_HOME/portal-ext.properties << EOF
+#jdbc.default.jndi.name=java:jboss/datasources/LiferayDS
+#EOF
 
 $WILDFLY_HOME/bin/jboss-cli.sh --echo-command --commands="\
 embed-server --admin-only --std-out=echo,\
