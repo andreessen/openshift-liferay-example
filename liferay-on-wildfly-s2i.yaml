@@ -40,7 +40,7 @@ parameters:
   from: '[a-zA-Z0-9]{16}'
   generate: expression
 - name: S2I_SOURCE_REPO
-  value: https://github.com/dsevost/openshift-liferay-example
+  value: https://github.com/andreessen/openshift-liferay-example
 - name: S2I_SOURCE_CONTEXT_DIR
   value: src
 - name: BUILD_STRATEGY
@@ -264,6 +264,8 @@ objects:
           - mountPath: /opt/app-root/liferay/portal-ext.properties
             name: portal-ext-props
             subPath: portal-ext.properties
+          - mountPath: /opt/app-root/liferay/data
+            name: ${APP_NAME}-liferay-data  
         dnsPolicy: ClusterFirst
         restartPolicy: Always
         volumes:
@@ -271,6 +273,9 @@ objects:
             defaultMode: 420
             name: ${APP_NAME}-portal-ext
           name: portal-ext-props
+        - name: ${APP_NAME}-liferay-data
+          persistentVolumeClaim:
+            claimName: ${APP_NAME}-liferay-data  
     triggers:
     - type: ConfigChange
     - imageChangeParams:
@@ -328,6 +333,18 @@ objects:
       requests:
         storage: 1Gi
 - apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    labels:
+      app: ${APP_NAME}
+    name: ${APP_NAME}-liferay-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 2Gi        
+- apiVersion: v1
   kind: Route
   metadata:
     labels:
@@ -362,3 +379,10 @@ objects:
   data:
     portal-ext.properties: |
       jdbc.default.jndi.name=java:jboss/datasources/${LF_DATASOURCE_NAME}
+      admin.email.from.address=test@liferay.com
+      admin.email.from.name=Test Test
+      company.default.locale=en_US
+      company.default.web.id=liferay.com
+      default.admin.email.address.prefix=test
+      liferay.home=/opt/app-root/liferay
+      setup.wizard.enabled=false
