@@ -41,6 +41,8 @@ parameters:
   generate: expression
 - name: S2I_SOURCE_REPO
   value: https://github.com/andreessen/openshift-liferay-example
+- name: S2I_SOURCE_REF
+  value: wildfly-10 
 - name: S2I_SOURCE_CONTEXT_DIR
   value: src
 - name: BUILD_STRATEGY
@@ -85,6 +87,7 @@ objects:
     source:
       contextDir: ${S2I_SOURCE_CONTEXT_DIR}
       git:
+        ref: ${S2I_SOURCE_REF}
         uri: ${S2I_SOURCE_REPO}
       type: Git
     strategy:
@@ -98,7 +101,7 @@ objects:
           value: ${LF_VERSION}
         from:
           kind: ImageStreamTag
-          name: wildfly:12.0
+          name: wildfly:10.0
           namespace: openshift
       type: ${BUILD_STRATEGY}
     triggers:
