@@ -100,7 +100,7 @@ objects:
         - name: LF_VERSION
           value: ${LF_VERSION}
         - name: APP_ROOT
-            value: /opt/app-root/  
+          value: /opt/app-root/  
         from:
           kind: ImageStreamTag
           name: wildfly:10.0
