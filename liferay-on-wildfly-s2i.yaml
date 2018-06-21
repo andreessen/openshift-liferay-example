@@ -99,6 +99,8 @@ objects:
           value: ${LF_BUILD}
         - name: LF_VERSION
           value: ${LF_VERSION}
+        - name: APP_ROOT
+            value: /opt/app-root/  
         from:
           kind: ImageStreamTag
           name: wildfly:10.0
@@ -253,8 +255,6 @@ objects:
             value: ${APP_NAME}-mysql
           - name: MYSQL_SERVICE_PORT
             value: '3306'
-          - name: APP_ROOT
-            value: /opt/app-root
           image: ' '
           imagePullPolicy: Always
           name: ${APP_NAME}
