@@ -15,8 +15,6 @@ RUN \
 
 RUN useradd -r elastic
 
-EXPOSE 9200
-
 RUN chown -R elastic ${APP_ROOT} ; \
 	chgrp -R 0 ${APP_ROOT} ; \
 	chmod -R g+rw ${APP_ROOT} ; \
@@ -26,5 +24,7 @@ USER elastic
 
 RUN /opt/app-root/elasticsearch/bin/plugin install analysis-smartcn
 RUN /opt/app-root/elasticsearch/bin/plugin install analysis-kuromoji
+
+EXPOSE 9200 9300
 
 CMD ["/opt/app-root/elasticsearch/bin/elasticsearch"]
