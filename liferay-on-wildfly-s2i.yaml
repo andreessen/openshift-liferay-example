@@ -79,7 +79,7 @@ objects:
   kind: ImageStream
   metadata:
     labels:
-      app: ${APP_NAME}-elastic
+      app: ${APP_NAME}
     name: ${APP_NAME}-elastic
   spec:
     lookupPolicy:
@@ -95,7 +95,7 @@ objects:
   kind: BuildConfig
   metadata:
     labels:
-      app: ${APP_NAME}-elastic
+      app: ${APP_NAME}
     name: ${APP_NAME}-elastic
   spec:
     resources:
@@ -183,7 +183,7 @@ objects:
   kind: DeploymentConfig
   metadata:
     labels:
-      app: ${APP_NAME}-elastic
+      app: ${APP_NAME}
     name: ${APP_NAME}-elastic
   spec:
     replicas: 1
@@ -427,7 +427,7 @@ objects:
   kind: Service
   metadata:
     labels:
-      app: ${APP_NAME}-elastic
+      app: ${APP_NAME}
     name: ${APP_NAME}-elastic
   spec:
     ports:
@@ -501,7 +501,7 @@ objects:
   kind: PersistentVolumeClaim
   metadata:
     labels:
-      app: ${APP_NAME}-elastic
+      app: ${APP_NAME}
     name: elastic-storage
   spec:
     accessModes:
