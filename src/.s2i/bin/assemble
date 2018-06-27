@@ -6,7 +6,7 @@ DL_PREFIX=${LF_REPO_PREFIX:-$DL_PREFIX}
 LIFERAY_HOME=${APP_ROOT}$LIFERAY_HOME
 
 for d in {${LF_DEPS},${LF_OSGI_DEPS}}-${LF_VERSION}-${LF_BUILD}.zip ; do
-    curl -Lo /tmp/$d ${DL_PREFIX}/${d}${DL_SUFFIX}
+    curl -k -Lo /tmp/$d ${DL_PREFIX}/${d}${DL_SUFFIX}
 done
 
 mkdir -p $WILDFLY_HOME/modules/com/liferay/portal/main
@@ -65,18 +65,18 @@ export SERVER_HOME=$WILDFLY_HOME
 #tar -C $WILDFLY_HOME -c standalone | tar -C $SERVER_HOME -x
 ln -s $WILDFLY_HOME $LIFERAY_HOME
 
-curl -Lo /tmp/${LF_PORTAL}-${LF_VERSION}-${LF_BUILD}.war ${DL_PREFIX}/${LF_PORTAL}-${LF_VERSION}-${LF_BUILD}.war${DL_SUFFIX}
+curl -k -Lo /tmp/${LF_PORTAL}-${LF_VERSION}-${LF_BUILD}.war ${DL_PREFIX}/${LF_PORTAL}-${LF_VERSION}-${LF_BUILD}.war${DL_SUFFIX}
 mkdir -p $WILDFLY_HOME/standalone/deployments/ROOT.war
 unzip -d $WILDFLY_HOME/standalone/deployments/ROOT.war /tmp/${LF_PORTAL}-${LF_VERSION}-${LF_BUILD}.war
 cat > $WILDFLY_HOME/standalone/deployments/ROOT.war.dodeploy << EOF
 EOF
 
-cat > $LIFERAY_HOME/osgi/configs/om.liferay.portal.search.elasticsearch.configuration.ElasticsearchConfiguration.config << EOF
-operationMode="REMOTE"
-# If running Elasticsearch from a different computer:
-transportAddresses="${ELASTIC_SERVICE_HOST}:${ELASTIC_SERVICE_PORT}"
-# Highly recommended for all non-prodcution usage (e.g., practice, tests, diagnostics):
-#logExceptionsOnly="false"
+cat > $LIFERAY_HOME/osgi/configs/com.liferay.portal.search.elasticsearch.configuration.ElasticsearchConfiguration.config << EOF
+operationMode="REMOTE" \
+# If running Elasticsearch from a different computer: \
+transportAddresses="${ELASTIC_SERVICE_HOST}:${ELASTIC_SERVICE_PORT}" \
+# Highly recommended for all non-prodcution usage (e.g., practice, tests, diagnostics): \
+#logExceptionsOnly="false" \
 EOF
 
 rm -rf /tmp/${LF_PORTAL}-${LF_VERSION}-${LF_BUILD}.war
