@@ -213,7 +213,7 @@ objects:
           imagePullPolicy: IfNotPresent
           name: ${APP_NAME}-elastic
           ports:
-          - containerPort: 9200
+          - containerPort: 9300
             protocol: TCP
           volumeMounts:
           - mountPath: /data
@@ -379,6 +379,10 @@ objects:
             value: ${APP_NAME}-mysql
           - name: MYSQL_SERVICE_PORT
             value: '3306'
+          - name: ELASTIC_SERVICE_HOST
+            value: ${APP_NAME}-elastic
+          - name: ELASTIC_SERVICE_PORT
+            value: '9300'  
           image: ' '
           imagePullPolicy: Always
           name: ${APP_NAME}
@@ -424,9 +428,9 @@ objects:
   spec:
     ports:
     - name: ${APP_NAME}-elastic
-      port: 9200
+      port: 9300
       protocol: TCP
-      targetPort: 9200
+      targetPort: 9300
     selector:
       name: ${APP_NAME}-elastic
     sessionAffinity: None

@@ -22,4 +22,7 @@ RUN chown -R elastic ${APP_ROOT} ; \
 
 USER elastic
 
+RUN /opt/app-root/elasticsearch/bin/plugin install analysis-smartcn
+RUN /opt/app-root/elasticsearch/bin/plugin install analysis-kuromoji
+
 CMD ["/opt/app-root/elasticsearch/bin/elasticsearch"]
