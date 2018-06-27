@@ -169,7 +169,7 @@ objects:
         - name: ELASTIC_SERVICE_HOST
           value: ${APP_NAME}-elastic
         - name: ELASTIC_SERVICE_PORT
-          value: '9300'  
+          value: '9200'  
         from:
           kind: ImageStreamTag
           name: wildfly:10.0
@@ -217,7 +217,7 @@ objects:
           imagePullPolicy: IfNotPresent
           name: ${APP_NAME}-elastic
           ports:
-          - containerPort: 9300
+          - containerPort: 9200
             protocol: TCP
           volumeMounts:
           - mountPath: /data
@@ -386,7 +386,7 @@ objects:
           - name: ELASTIC_SERVICE_HOST
             value: ${APP_NAME}-elastic
           - name: ELASTIC_SERVICE_PORT
-            value: '9300'  
+            value: '9200'  
           image: ' '
           imagePullPolicy: Always
           name: ${APP_NAME}
@@ -432,9 +432,9 @@ objects:
   spec:
     ports:
     - name: ${APP_NAME}-elastic
-      port: 9300
+      port: 9200
       protocol: TCP
-      targetPort: 9300
+      targetPort: 9200
     selector:
       name: ${APP_NAME}-elastic
     sessionAffinity: None
