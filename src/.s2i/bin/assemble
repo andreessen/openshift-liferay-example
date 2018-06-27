@@ -72,7 +72,7 @@ cat > $WILDFLY_HOME/standalone/deployments/ROOT.war.dodeploy << EOF
 EOF
 
 cat > $LIFERAY_HOME/osgi/configs/com.liferay.portal.search.elasticsearch.configuration.ElasticsearchConfiguration.config << EOF
-operationMode="REMOTE" \
+operationMode="REMOTE" 
 transportAddresses="${ELASTIC_SERVICE_HOST}:${ELASTIC_SERVICE_PORT}" 
 EOF
 
