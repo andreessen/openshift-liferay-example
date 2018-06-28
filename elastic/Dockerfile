@@ -13,6 +13,8 @@ RUN \
 	mkdir -p ${EL_HOME} ;\
 	mv ${APP_ROOT}/elasticsearch-$EL_VERSION/* ${EL_HOME}
 
+COPY elasticsearch.yml $EL_HOME/config
+
 RUN useradd -r elastic
 
 RUN chown -R elastic ${APP_ROOT} ; \
@@ -25,6 +27,6 @@ USER elastic
 RUN /opt/app-root/elasticsearch/bin/plugin install analysis-smartcn
 RUN /opt/app-root/elasticsearch/bin/plugin install analysis-kuromoji
 
-EXPOSE 9200 9300
+EXPOSE 9200
 
 CMD ["/opt/app-root/elasticsearch/bin/elasticsearch"]
