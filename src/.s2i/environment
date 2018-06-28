@@ -12,4 +12,4 @@ LF_CACHE_JAR_1=com.liferay.portal.cache.ehcache.multiple
 LF_CACHE_JAR_2=com.liferay.portal.cluster.multiple
 LF_CACHE_JAR_3=com.liferay.portal.scheduler.multiple
 LF_PORTAL=liferay-ce-portal
-JAVA_OPTS=-Xmx1536M
+JAVA_OPTS=-Xmx1024M
