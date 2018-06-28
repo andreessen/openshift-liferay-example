@@ -557,3 +557,4 @@ objects:
       setup.wizard.enabled=false
       dl.store.impl=com.liferay.portal.store.file.system.AdvancedFileSystemStore
       cluster.link.enabled=true
+      module.framework.properties.lpkg.index.validator.enabled=false
