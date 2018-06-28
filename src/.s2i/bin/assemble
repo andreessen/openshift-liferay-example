@@ -5,6 +5,12 @@ set -xe
 DL_PREFIX=${LF_REPO_PREFIX:-$DL_PREFIX}
 LIFERAY_HOME=${APP_ROOT}$LIFERAY_HOME
 
+mkdir /tmp/cache_jars
+
+for d in {${LF_CACHE_JAR_1},${LF_CACHE_JAR_2},${LF_CACHE_JAR_3}}.jar ; do
+    curl -k -Lo /tmp/cache_jars/$d ${CACHE_JARS_URL}${d}
+done
+
 for d in {${LF_DEPS},${LF_OSGI_DEPS}}-${LF_VERSION}-${LF_BUILD}.zip ; do
     curl -k -Lo /tmp/$d ${DL_PREFIX}/${d}${DL_SUFFIX}
 done
@@ -12,6 +18,8 @@ done
 mkdir -p $WILDFLY_HOME/modules/com/liferay/portal/main
 ls -la /
 mkdir -p $LIFERAY_HOME/osgi
+mkdir -p $LIFERAY_HOME/portal
+cp -a /tmp/cache_jars/* $LIFERAY_HOME/portal/
 
 unzip -j -d $WILDFLY_HOME/modules/com/liferay/portal/main /tmp/${LF_DEPS}-${LF_VERSION}-${LF_BUILD}.zip
 

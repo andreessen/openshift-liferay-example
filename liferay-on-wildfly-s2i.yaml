@@ -53,7 +53,9 @@ parameters:
 - name: S2I_SOURCE_CONTEXT_DIR
   value: src
 - name: ELASTIC_SOURCE_CONTEXT_DIR
-  value: elastic  
+  value: elastic
+- name: CACHE_JARS_URL
+  value: https://github.com/andreessen/openshift-liferay-example/raw/wildfly-10/jars/  
 - name: BUILD_STRATEGY
   description: 'It could be two strategies: source or docker'
   from: '[sourcedk]'
@@ -169,7 +171,9 @@ objects:
         - name: ELASTIC_SERVICE_HOST
           value: ${APP_NAME}-elastic
         - name: ELASTIC_SERVICE_PORT
-          value: '9300'  
+          value: '9300'
+        - name: CACHE_JARS_URL
+          value: ${CACHE_JARS_URL}
         from:
           kind: ImageStreamTag
           name: wildfly:10.0
@@ -552,3 +556,4 @@ objects:
       liferay.home=/opt/app-root/liferay
       setup.wizard.enabled=false
       dl.store.impl=com.liferay.portal.store.file.system.AdvancedFileSystemStore
+      cluster.link.enabled=true
