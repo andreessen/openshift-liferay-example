@@ -76,6 +76,10 @@ operationMode="REMOTE"
 transportAddresses="${ELASTIC_SERVICE_HOST}:${ELASTIC_SERVICE_PORT}" 
 EOF
 
+cat > $LIFERAY_HOME/osgi/configs/com.liferay.portal.store.file.system.configuration.AdvancedFileSystemStoreConfiguration.cfg << EOF
+rootDir=data/document_library 
+EOF
+
 rm -rf /tmp/${LF_PORTAL}-${LF_VERSION}-${LF_BUILD}.war
 
 rm -rf $SERVER_HOME/standalone/configuration/standalone_xml_history
