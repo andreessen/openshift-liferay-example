@@ -12,7 +12,7 @@ parameters:
 - name: LF_MEMORY_LIMIT
   value: 1536Mi
 - name: LF_CPU_LIMIT
-  value: 500m
+  value: '1'
 - name: LF_VERSION
   description: LifeRay version
   value: '7.0-ga5'
