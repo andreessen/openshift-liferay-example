@@ -27,6 +27,6 @@ RUN /opt/app-root/elasticsearch/bin/plugin install analysis-kuromoji
 
 COPY elasticsearch.yml $EL_HOME/config
 
-EXPOSE 9200
+EXPOSE 9200 9300
 
 CMD ["/opt/app-root/elasticsearch/bin/elasticsearch"]
