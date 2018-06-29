@@ -27,7 +27,7 @@ parameters:
     if blank all resources downloaded from https://sourceforge.net/projects/lportal/files/Liferay%20Portal/7.0.4%20GA5
   value: ''
 - name: APP_HOSTNAME
-  value: ''
+  value: 'liferay.openshift.tk'
 - name: LF_DATASOURCE_NAME
   description: it will be conjunced with 'java:jboss/datasources/', and with name equals 'java:jboss/datasources/${LF_DATASOURCE_NAME}'
   value: LiferayDS
@@ -559,3 +559,4 @@ objects:
       cluster.link.enabled=true
       module.framework.properties.lpkg.index.validator.enabled=false
       web.server.display.node=true
+      web.server.host=${APP_HOSTNAME}
