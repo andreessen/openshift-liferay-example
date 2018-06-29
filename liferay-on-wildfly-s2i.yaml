@@ -332,7 +332,7 @@ objects:
         - mysql
         from:
           kind: ImageStreamTag
-          name: mysql:5.7
+          name: mysql:5.6
           namespace: openshift
       type: ImageChange
     - type: ConfigChange
