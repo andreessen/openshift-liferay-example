@@ -558,3 +558,4 @@ objects:
       dl.store.impl=com.liferay.portal.store.file.system.AdvancedFileSystemStore
       cluster.link.enabled=true
       module.framework.properties.lpkg.index.validator.enabled=false
+      web.server.display.node=true
