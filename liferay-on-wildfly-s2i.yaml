@@ -223,6 +223,8 @@ objects:
           ports:
           - containerPort: 9300
             protocol: TCP
+          - containerPort: 9200
+            protocol: TCP  
           volumeMounts:
           - mountPath: /data
             name: elastic-storage
@@ -442,7 +444,23 @@ objects:
     selector:
       name: ${APP_NAME}-elastic
     sessionAffinity: None
-    type: ClusterIP      
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: ${APP_NAME}
+    name: ${APP_NAME}-elastic-9200
+  spec:
+    ports:
+    - name: ${APP_NAME}-elastic-9200
+      port: 9200
+      protocol: TCP
+      targetPort: 9200
+    selector:
+      name: ${APP_NAME}-elastic
+    sessionAffinity: None
+    type: ClusterIP       
 - apiVersion: v1
   kind: Service
   metadata:
