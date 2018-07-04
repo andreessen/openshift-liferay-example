@@ -81,7 +81,6 @@ cat > $LIFERAY_HOME/osgi/configs/com.liferay.portal.search.elasticsearch.configu
 operationMode=REMOTE
 transportAddresses=${ELASTIC_SERVICE_HOST}:${ELASTIC_SERVICE_PORT}
 clusterName=LiferayElasticsearchCluster
-httpCORSAllowOrigin=/https?://${ELASTIC_SERVICE_HOST}(:[0-9]+)?/
 EOF
 
 cat > $LIFERAY_HOME/osgi/configs/com.liferay.portal.store.file.system.configuration.AdvancedFileSystemStoreConfiguration.cfg << EOF
