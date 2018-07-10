@@ -169,9 +169,9 @@ objects:
         - name: APP_ROOT
           value: /opt/app-root/
         - name: ELASTIC_SERVICE_HOST
-          value: ${APP_NAME}-elastic
+          value: sb85.emdev.ru
         - name: ELASTIC_SERVICE_PORT
-          value: '9300'
+          value: '39300'
         - name: CACHE_JARS_URL
           value: ${CACHE_JARS_URL}
         from:
@@ -390,9 +390,9 @@ objects:
           - name: MYSQL_SERVICE_PORT
             value: '3306'
           - name: ELASTIC_SERVICE_HOST
-            value: ${APP_NAME}-elastic
+            value: sb85.emdev.ru
           - name: ELASTIC_SERVICE_PORT
-            value: '9300'  
+            value: '39300'  
           image: ' '
           imagePullPolicy: Always
           name: ${APP_NAME}
