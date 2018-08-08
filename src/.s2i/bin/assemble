@@ -79,7 +79,7 @@ EOF
 
 cat > $LIFERAY_HOME/osgi/configs/com.liferay.portal.search.elasticsearch.configuration.ElasticsearchConfiguration.config << EOF
 operationMode="REMOTE"
-transportAddresses="sb85.emdev.ru:39300"
+transportAddresses="${ELASTIC_SERVICE_HOST}:${ELASTIC_SERVICE_PORT}"
 clusterName="LiferayElasticsearchCluster"
 EOF
 

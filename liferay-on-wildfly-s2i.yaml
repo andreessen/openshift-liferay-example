@@ -204,7 +204,7 @@ objects:
         containers:
         - env:
           - name: "CLUSTER_NAME"
-            value: "myesdb"
+            value: "LiferayElasticsearchCluster"
           - name: "NUMBER_OF_MASTERS"
             value: "2"
           - name: NODE_MASTER
